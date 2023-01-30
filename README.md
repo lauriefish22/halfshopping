@@ -43,3 +43,47 @@ The following is required for your assignment to be graded:
 | Users can add todos to the database | 2.5    |
 | Users can complete todos            | 2.5    |
 | Users can delete all todos          | 2.5    |
+
+DATA MODEL
+
+shopping list items
+id
+created_at
+item
+quantity
+is_bought
+user_id
+
+AUTH PAGE
+
+come with template
+
+LIST PAGE- slices
+
+1. on submit: user should be able to add an item and it's quantity.
+   get form data in a submit listener. Remember (e) etc..
+   submit
+   <input name="quantity" />
+   const data = new formData(myFormEl);
+   `data.get('quantity')`
+   using form data, we send it to SB to create a new list_item.
+
+2. on submit: user can see the items added. but only their own items.
+   -fetch the users list items
+   -put them in state
+   -clear the DOM out and re-display the list_items
+
+3. on click: user should be able to designate the item as "bought" but only their own items.
+   -after we render each item, call sB
+
+4. on load: fetch, render and append the items the user already added in the past. but only their own items.
+   -fetch the users list items
+   -put them in state
+   -clear the DOM out and re-display the list_items
+
+5. when rendering the list, items that are "bought" should be rendered differently.but only their own items.
+   -in our renderListItem function
+   look at the boolean is_bought
+   if is_bought is true, put a new class on the element
+
+on load: if user is logged in, display the email in header.
