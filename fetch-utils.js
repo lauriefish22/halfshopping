@@ -5,20 +5,19 @@ const SUPABASE_KEY =
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 export async function createTodo() {
-    const { data, error } = await client
-    .from('todos')
-    .insert {
-        todo: todo
-    }
+    const { data, error } = await client.from('todo').select('*');
+
     return data;
-    
-};
-    
+}
+
+//export async function deleteAllTodos() {
+// delete all todos for this user in supabase
+// once you have a response from supabase, comment this back in:
+// return checkError(response);
 
 export async function deleteAllTodos() {
-    // delete all todos for this user in supabase
-    // once you have a response from supabase, comment this back in:
-    // return checkError(response);
+    const response = await client.from('todos').delete().match({ user_id: getUser().id });
+    return checkError(response);
 }
 
 export async function getTodos() {
@@ -29,8 +28,9 @@ export async function getTodos() {
 
 export async function completeTodo(id) {
     // find the and update (set complete to true), the todo that matches the correct id
+    const { data, error } = await client.from('todo').update({ is_complete: true }).eq('id', id);
     // once you have a response from supabase, comment this back in:
-    // return checkError(response);
+    return checkError(response);
 }
 
 export function getUser() {
